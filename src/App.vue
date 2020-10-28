@@ -1,30 +1,52 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+    <div class='main'>
+        <h1>Vue Nice Datatable</h1>
+        <div class="container">
+            <vue-nice-datatable :data="users" :searchable="true" :paginate="true" :per-page="10">
+                <template #thead>
+                    <nice-tr>
+                        <nice-th>ID</nice-th>
+                        <nice-th>Name</nice-th>
+                        <nice-th>Country</nice-th>
+                        <nice-th>Email</nice-th>
+                        <nice-th>Phone</nice-th>
+                        <nice-th>Status</nice-th>
+                    </nice-tr>
+                </template>
+                <template #tbody="{key,data}">
+                    <nice-tr>
+                        <nice-td>{{++key}}</nice-td>
+                        <nice-td>{{data.name}}</nice-td>
+                        <nice-td>{{data.country}}</nice-td>
+                        <nice-td>{{data.email}}</nice-td>
+                        <nice-td>{{data.phone}}</nice-td>
+                        <nice-td>{{data.status}}</nice-td>
+                    </nice-tr>
+                </template>
+            </vue-nice-datatable>
+        </div>
+    </div>
 </template>
-
+<script>
+import  data from './data.json'
+export default {
+    data: () => ({
+        users: data
+    })
+}
+</script>
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    .container {
+        width: 1140px;
+        margin: 0 auto;
     }
-  }
-}
+    .main {
+        font-family: sans-serif;
+        background-color: f4f4f2;
+        h1 {
+            font-weight: 400;
+            font-size: 4rem;
+            text-align: center;
+        }
+    }
 </style>
